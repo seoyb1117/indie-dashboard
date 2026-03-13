@@ -13,7 +13,13 @@ st.title("🔒 Indie 작가 관리 대시보드")
 
 password = st.text_input("비밀번호를 입력하세요", type="password")
 
-if password != st.secrets["APP_PASSWORD"]:
+app_password = st.secrets.get("APP_PASSWORD")
+
+if not app_password:
+    st.error("APP_PASSWORD가 Secrets에 설정되어 있지 않습니다.")
+    st.stop()
+
+if password != app_password:
     st.warning("비밀번호를 입력해야 접근할 수 있습니다.")
     st.stop()
 
