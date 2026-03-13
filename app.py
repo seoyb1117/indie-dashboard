@@ -99,9 +99,9 @@ approval_rate = ((approved_count + temp_approved_count) / total_count * 100) if 
 
 c1, c2, c3, c4 = st.columns(4)
 c1.metric("총 기록 수", total_count)
-c2.metric("승인", approved_count)
-c3.metric("임시 승인", temp_approved_count)
-c4.metric("반려", rejected_count)
+c2.metric("🟢 승인", approved_count)
+c3.metric("🟡 임시 승인", temp_approved_count)
+c4.metric("🔴 반려", rejected_count)
 
 st.metric("통과율(승인+임시승인)", f"{approval_rate:.1f}%")
 
