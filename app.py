@@ -13,8 +13,6 @@ st.title("🔒 Indie 작가 관리 대시보드")
 
 password = st.text_input("비밀번호를 입력하세요", type="password")
 
-st.write(st.secrets)
-
 app_password = st.secrets.get("APP_PASSWORD")
 
 if not app_password:
