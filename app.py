@@ -36,12 +36,6 @@ span[data-baseweb="tag"]:nth-child(3) {
 </style>
 """, unsafe_allow_html=True)
 
-px.defaults.color_discrete_sequence = [
-    "#22c55e",
-    "#f59e0b",
-    "#ef4444"
-]
-
 st.set_page_config(page_title="Indie 작가 대시보드", layout="wide")
 
 REQUIRED_COLUMNS = ["상태", "회원번호", "닉네임", "일시", "입금 방법", "반려 사유", "비고"]
