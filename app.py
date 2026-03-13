@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gspread
+from google.oauth2.service_account import Credentials
 
 st.set_page_config(page_title="Indie 작가 대시보드", layout="wide")
 
@@ -27,14 +29,23 @@ def normalize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
 st.title("Indie 작가 대시보드")
 
-uploaded_file = st.file_uploader("엑셀 파일 업로드 (.xlsx)", type=["xlsx"])
+scope = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
 
-if uploaded_file is None:
-    st.info("엑셀 파일을 업로드해줘.")
-    st.stop()
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=scope
+)
 
-# 첫 번째 시트 읽기
-df = pd.read_excel(uploaded_file)
+client = gspread.authorize(creds)
+
+sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1Gkp8cbJjASfyvwK1DX2R8owplbeFi1dSdL2xD6SY2Bo/edit?gid=0#gid=0")
+worksheet = sheet.sheet1
+
+data = worksheet.get_all_records()
+df = pd.DataFrame(data)
 df = normalize_dataframe(df)
 
 # 상태 표준화
