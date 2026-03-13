@@ -227,10 +227,9 @@ if len(status_df) > 0:
 
     st.plotly_chart(fig_status, use_container_width=True)
 
-st.plotly_chart(fig_status, use_container_width=True)
 else:
     st.caption("표시할 데이터가 없습니다.")
-
+    
 st.divider()
 
 # -----------------------
