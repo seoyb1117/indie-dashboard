@@ -169,7 +169,13 @@ with g1:
             .sort_values("날짜")
         )
 
-        fig_trend = px.line(trend_df, x="날짜", y="건수", markers=True)
+        fig_trend = px.line(
+    trend_df,
+    x="날짜",
+    y="건수",
+    markers=True,
+    color_discrete_sequence=["#60a5fa"]
+)
         st.plotly_chart(fig_trend, use_container_width=True)
     else:
         st.caption("표시할 날짜 데이터가 없습니다.")
@@ -187,7 +193,12 @@ with g2:
             .reset_index(name="건수")
             .sort_values("건수", ascending=False)
         )
-        fig_reason = px.bar(reason_df, x="반려 사유", y="건수")
+        fig_reason = px.bar(
+    reason_df,
+    x="반려 사유",
+    y="건수",
+    color_discrete_sequence=["#60a5fa"]
+)
         st.plotly_chart(fig_reason, use_container_width=True)
     else:
         st.caption("반려 데이터가 없습니다.")
