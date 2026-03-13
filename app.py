@@ -9,6 +9,14 @@ st.set_page_config(
     layout="wide"
 )
 
+st.title("🔒 Indie 작가 관리 대시보드")
+
+password = st.text_input("비밀번호를 입력하세요", type="password")
+
+if password != st.secrets["APP_PASSWORD"]:
+    st.warning("비밀번호를 입력해야 접근할 수 있습니다.")
+    st.stop()
+
 st.markdown("""
 <style>
 
