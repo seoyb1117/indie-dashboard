@@ -140,7 +140,7 @@ with g1:
         fig_trend = px.line(trend_df, x="날짜", y="건수", markers=True)
         st.plotly_chart(fig_trend, use_container_width=True)
     else:
-        st.caption("표시할 날짜 데이터가 없어.")
+        st.caption("표시할 날짜 데이터가 없습니다.")
 
 with g2:
     st.subheader("반려 사유 분포")
@@ -158,7 +158,7 @@ with g2:
         fig_reason = px.bar(reason_df, x="반려 사유", y="건수")
         st.plotly_chart(fig_reason, use_container_width=True)
     else:
-        st.caption("반려 데이터가 없어.")
+        st.caption("반려 데이터가 없습니다.")
 
 st.divider()
 
@@ -178,7 +178,7 @@ if len(status_df) > 0:
     fig_status = px.pie(status_df, names="상태", values="건수")
     st.plotly_chart(fig_status, use_container_width=True)
 else:
-    st.caption("표시할 데이터가 없어.")
+    st.caption("표시할 데이터가 없습니다.")
 
 st.divider()
 
@@ -225,7 +225,7 @@ if target_member:
     member_df = df[df["회원번호"] == target_member].copy()
 
     if len(member_df) == 0:
-        st.warning("해당 회원번호 기록이 없어.")
+        st.warning("해당 회원번호 기록이 없습니다.")
     else:
         m1, m2, m3, m4 = st.columns(4)
         m1.metric("총 기록", len(member_df))
