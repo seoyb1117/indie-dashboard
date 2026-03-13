@@ -4,6 +4,44 @@ import plotly.express as px
 import gspread
 from google.oauth2.service_account import Credentials
 
+st.set_page_config(
+    page_title="Indie 작가 대시보드",
+    layout="wide"
+)
+
+st.markdown("""
+<style>
+
+/* multiselect 선택 태그 기본 스타일 */
+span[data-baseweb="tag"] {
+    color: white !important;
+    font-weight: 600;
+}
+
+/* 승인 */
+span[data-baseweb="tag"]:nth-child(1) {
+    background-color: #22c55e !important;
+}
+
+/* 임시 승인 */
+span[data-baseweb="tag"]:nth-child(2) {
+    background-color: #f59e0b !important;
+}
+
+/* 반려 */
+span[data-baseweb="tag"]:nth-child(3) {
+    background-color: #ef4444 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+px.defaults.color_discrete_sequence = [
+    "#22c55e",
+    "#f59e0b",
+    "#ef4444"
+]
+
 st.set_page_config(page_title="Indie 작가 대시보드", layout="wide")
 
 REQUIRED_COLUMNS = ["상태", "회원번호", "닉네임", "일시", "입금 방법", "반려 사유", "비고"]
@@ -175,8 +213,19 @@ status_df = (
 )
 
 if len(status_df) > 0:
-    fig_status = px.pie(status_df, names="상태", values="건수")
-    st.plotly_chart(fig_status, use_container_width=True)
+fig_status = px.pie(
+    status_df,
+    names="상태",
+    values="건수",
+    color="상태",
+    color_discrete_map={
+        "승인": "#22c55e",
+        "임시 승인": "#f59e0b",
+        "반려": "#ef4444"
+    }
+)
+
+st.plotly_chart(fig_status, use_container_width=True)
 else:
     st.caption("표시할 데이터가 없습니다.")
 
