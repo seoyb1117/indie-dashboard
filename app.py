@@ -213,17 +213,19 @@ status_df = (
 )
 
 if len(status_df) > 0:
-fig_status = px.pie(
-    status_df,
-    names="상태",
-    values="건수",
-    color="상태",
-    color_discrete_map={
-        "승인": "#22c55e",
-        "임시 승인": "#f59e0b",
-        "반려": "#ef4444"
-    }
-)
+    fig_status = px.pie(
+        status_df,
+        names="상태",
+        values="건수",
+        color="상태",
+        color_discrete_map={
+            "승인": "#22c55e",
+            "임시 승인": "#f59e0b",
+            "반려": "#ef4444"
+        }
+    )
+
+    st.plotly_chart(fig_status, use_container_width=True)
 
 st.plotly_chart(fig_status, use_container_width=True)
 else:
